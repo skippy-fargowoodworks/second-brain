@@ -1,87 +1,65 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import {
   CheckSquare,
   Clock,
   AlertTriangle,
   FileText,
-  MessageSquare,
-  Key,
-  LucideIcon,
 } from "lucide-react";
 
 interface CardProps {
   children: React.ReactNode;
   className?: string;
-  hover?: boolean;
 }
 
-export function Card({ children, className, hover = true }: CardProps) {
+export function Card({ children, className }: CardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={cn(
-        "glass-card p-4 2xl:p-6",
-        hover && "cursor-pointer",
-        className
-      )}
-    >
+    <div className={cn(
+      "bg-gray-900/80 border border-gray-800 rounded-xl p-4",
+      className
+    )}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-// Map icon names to components (avoid serialization issues)
-const iconMap: Record<string, LucideIcon> = {
+const iconMap: Record<string, any> = {
   CheckSquare,
   Clock,
   AlertTriangle,
   FileText,
-  MessageSquare,
-  Key,
 };
 
 export function StatCard({
   title,
   value,
   iconName,
-  trend,
-  color = "primary",
+  color = "blue",
 }: {
   title: string;
   value: string | number;
   iconName: string;
-  trend?: string;
-  color?: "primary" | "accent" | "success" | "warning";
+  color?: "blue" | "purple" | "yellow" | "green";
 }) {
   const colorClasses = {
-    primary: "from-primary-500/20 to-primary-600/20 text-primary-400",
-    accent: "from-accent-500/20 to-accent-600/20 text-accent-400",
-    success: "from-green-500/20 to-green-600/20 text-green-400",
-    warning: "from-yellow-500/20 to-yellow-600/20 text-yellow-400",
+    blue: "bg-blue-500/20 text-blue-400",
+    purple: "bg-purple-500/20 text-purple-400",
+    yellow: "bg-yellow-500/20 text-yellow-400",
+    green: "bg-green-500/20 text-green-400",
   };
 
   const Icon = iconMap[iconName] || CheckSquare;
 
   return (
-    <Card hover={false}>
-      <div className="flex items-start justify-between">
+    <Card>
+      <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs 2xl:text-sm text-gray-400 mb-1">{title}</p>
-          <p className="text-2xl 2xl:text-3xl font-bold">{value}</p>
-          {trend && (
-            <p className="text-xs 2xl:text-sm text-green-400 mt-2">{trend}</p>
-          )}
+          <p className="text-xs text-gray-400">{title}</p>
+          <p className="text-2xl font-bold mt-1">{value}</p>
         </div>
-        <div className={cn(
-          "w-10 h-10 2xl:w-12 2xl:h-12 rounded-xl bg-gradient-to-br flex items-center justify-center",
-          colorClasses[color]
-        )}>
-          <Icon className="w-5 h-5 2xl:w-6 2xl:h-6" />
+        <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", colorClasses[color])}>
+          <Icon className="w-5 h-5" />
         </div>
       </div>
     </Card>
