@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("todo") // todo, in-progress, done, blocked
+  priority    String   @default("medium") // low, medium, high, critical
+  dueDate     DateTime?
+  category    String?
+  tags        String?  // comma-separated
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  category    String   @default("general") // projects, ideas, reference, general
+  tags        String?  // comma-separated
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Conversation {
+  id           String   @id @default(cuid())
+  title        String
+  participants String   // comma-separated
+  summary      String
+  decisions    String?  // what was decided
+  linkedTasks  String?  // task IDs, comma-separated
+  date         DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Credential {
+  id          String   @id @default(cuid())
+  service     String
+  username    String
+  password    String   // Will be masked in UI
+  url         String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
