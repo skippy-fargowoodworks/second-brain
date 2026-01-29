@@ -25,7 +25,7 @@ export function Card({ children, className, hover = true }: CardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "glass-card p-4 lg:p-6",
+        "glass-card p-4 xl:p-6",
         hover && "cursor-pointer",
         className
       )}
@@ -71,17 +71,17 @@ export function StatCard({
     <Card hover={false}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs lg:text-sm text-gray-400 mb-1">{title}</p>
-          <p className="text-2xl lg:text-3xl font-bold">{value}</p>
+          <p className="text-xs xl:text-sm text-gray-400 mb-1">{title}</p>
+          <p className="text-2xl xl:text-3xl font-bold">{value}</p>
           {trend && (
-            <p className="text-xs lg:text-sm text-green-400 mt-2">{trend}</p>
+            <p className="text-xs xl:text-sm text-green-400 mt-2">{trend}</p>
           )}
         </div>
         <div className={cn(
-          "w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br flex items-center justify-center",
+          "w-10 h-10 xl:w-12 xl:h-12 rounded-xl bg-gradient-to-br flex items-center justify-center",
           colorClasses[color]
         )}>
-          <Icon className="w-5 h-5 lg:w-6 lg:h-6" />
+          <Icon className="w-5 h-5 xl:w-6 xl:h-6" />
         </div>
       </div>
     </Card>
