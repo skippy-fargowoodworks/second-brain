@@ -33,7 +33,7 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Header */}
-      <header className="xl:hidden fixed top-0 left-0 right-0 h-16 glass border-b border-glass-border z-50 flex items-center justify-between px-4">
+      <header className="2xl:hidden fixed top-0 left-0 right-0 h-16 glass border-b border-glass-border z-50 flex items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
             <Brain className="w-5 h-5 text-white" />
@@ -51,7 +51,7 @@ export function Sidebar() {
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="xl:hidden fixed inset-0 bg-black/50 z-40"
+          className="2xl:hidden fixed inset-0 bg-black/50 z-40"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -60,8 +60,8 @@ export function Sidebar() {
       <aside
         className={cn(
           "fixed left-0 top-0 h-screen w-64 glass border-r border-glass-border flex flex-col z-50 transition-transform duration-300",
-          "xl:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full xl:translate-x-0"
+          "2xl:translate-x-0",
+          isOpen ? "translate-x-0" : "-translate-x-full 2xl:translate-x-0"
         )}
       >
         {/* Logo */}
