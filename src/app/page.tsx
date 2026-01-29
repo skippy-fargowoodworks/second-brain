@@ -28,17 +28,17 @@ export default async function Dashboard() {
   const stats = await getStats();
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-6 lg:space-y-8 animate-fade-in max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold gradient-text">Dashboard</h1>
-        <p className="text-gray-400 mt-2">
+        <h1 className="text-2xl lg:text-3xl font-bold gradient-text">Dashboard</h1>
+        <p className="text-gray-400 mt-1 text-sm lg:text-base">
           Welcome back. Here&apos;s your overview.
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
         <StatCard
           title="Total Tasks"
           value={stats.totalTasks}
@@ -67,56 +67,56 @@ export default async function Dashboard() {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <h2 className="text-lg lg:text-xl font-semibold mb-3 lg:mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
           <Link href="/tasks">
             <Card className="group">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors">
-                  <Zap className="w-5 h-5 text-primary-400" />
+              <div className="flex items-center gap-2 lg:gap-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-primary-500/20 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors">
+                  <Zap className="w-4 h-4 lg:w-5 lg:h-5 text-primary-400" />
                 </div>
                 <div>
-                  <p className="font-medium">Tasks</p>
-                  <p className="text-sm text-gray-400">View all</p>
+                  <p className="font-medium text-sm lg:text-base">Tasks</p>
+                  <p className="text-xs lg:text-sm text-gray-400">View all</p>
                 </div>
               </div>
             </Card>
           </Link>
           <Link href="/notes">
             <Card className="group">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent-500/20 flex items-center justify-center group-hover:bg-accent-500/30 transition-colors">
-                  <FileText className="w-5 h-5 text-accent-400" />
+              <div className="flex items-center gap-2 lg:gap-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-accent-500/20 flex items-center justify-center group-hover:bg-accent-500/30 transition-colors">
+                  <FileText className="w-4 h-4 lg:w-5 lg:h-5 text-accent-400" />
                 </div>
                 <div>
-                  <p className="font-medium">Notes</p>
-                  <p className="text-sm text-gray-400">View all</p>
+                  <p className="font-medium text-sm lg:text-base">Notes</p>
+                  <p className="text-xs lg:text-sm text-gray-400">View all</p>
                 </div>
               </div>
             </Card>
           </Link>
           <Link href="/conversations">
             <Card className="group">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
-                  <MessageSquare className="w-5 h-5 text-green-400" />
+              <div className="flex items-center gap-2 lg:gap-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
+                  <MessageSquare className="w-4 h-4 lg:w-5 lg:h-5 text-green-400" />
                 </div>
                 <div>
-                  <p className="font-medium">Conversations</p>
-                  <p className="text-sm text-gray-400">View all</p>
+                  <p className="font-medium text-sm lg:text-base">Conversations</p>
+                  <p className="text-xs lg:text-sm text-gray-400">View all</p>
                 </div>
               </div>
             </Card>
           </Link>
           <Link href="/vault">
             <Card className="group">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center group-hover:bg-yellow-500/30 transition-colors">
-                  <Key className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-2 lg:gap-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center group-hover:bg-yellow-500/30 transition-colors">
+                  <Key className="w-4 h-4 lg:w-5 lg:h-5 text-yellow-400" />
                 </div>
                 <div>
-                  <p className="font-medium">Vault</p>
-                  <p className="text-sm text-gray-400">Credentials</p>
+                  <p className="font-medium text-sm lg:text-base">Vault</p>
+                  <p className="text-xs lg:text-sm text-gray-400">Credentials</p>
                 </div>
               </div>
             </Card>
@@ -125,30 +125,30 @@ export default async function Dashboard() {
       </div>
 
       {/* Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Recent Tasks */}
         <Card hover={false}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-lg">Recent Tasks</h3>
-            <Link href="/tasks" className="text-sm text-primary-400 hover:text-primary-300">
+          <div className="flex items-center justify-between mb-3 lg:mb-4">
+            <h3 className="font-semibold text-base lg:text-lg">Recent Tasks</h3>
+            <Link href="/tasks" className="text-xs lg:text-sm text-primary-400 hover:text-primary-300">
               View all
             </Link>
           </div>
           {stats.recentTasks.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">No tasks yet</p>
+            <p className="text-gray-500 text-center py-6 lg:py-8 text-sm">No tasks yet</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 lg:space-y-3">
               {stats.recentTasks.map((task) => (
                 <div
                   key={task.id}
-                  className="flex items-center justify-between p-3 rounded-lg bg-glass-light hover:bg-glass transition-colors"
+                  className="flex items-center justify-between p-2 lg:p-3 rounded-lg bg-glass-light hover:bg-glass transition-colors"
                 >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium truncate">{task.title}</p>
-                    <p className="text-sm text-gray-400">{task.category || "No category"}</p>
+                  <div className="flex-1 min-w-0 mr-2">
+                    <p className="font-medium text-sm lg:text-base truncate">{task.title}</p>
+                    <p className="text-xs lg:text-sm text-gray-400">{task.category || "No category"}</p>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded text-xs font-medium ml-2 ${
+                    className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${
                       task.priority === "critical"
                         ? "bg-red-500/20 text-red-400"
                         : task.priority === "high"
@@ -166,23 +166,23 @@ export default async function Dashboard() {
 
         {/* Recent Notes */}
         <Card hover={false}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-lg">Recent Notes</h3>
-            <Link href="/notes" className="text-sm text-primary-400 hover:text-primary-300">
+          <div className="flex items-center justify-between mb-3 lg:mb-4">
+            <h3 className="font-semibold text-base lg:text-lg">Recent Notes</h3>
+            <Link href="/notes" className="text-xs lg:text-sm text-primary-400 hover:text-primary-300">
               View all
             </Link>
           </div>
           {stats.recentNotes.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">No notes yet</p>
+            <p className="text-gray-500 text-center py-6 lg:py-8 text-sm">No notes yet</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 lg:space-y-3">
               {stats.recentNotes.map((note) => (
                 <div
                   key={note.id}
-                  className="p-3 rounded-lg bg-glass-light hover:bg-glass transition-colors"
+                  className="p-2 lg:p-3 rounded-lg bg-glass-light hover:bg-glass transition-colors"
                 >
-                  <p className="font-medium">{note.title}</p>
-                  <p className="text-sm text-gray-400 line-clamp-2">{note.content}</p>
+                  <p className="font-medium text-sm lg:text-base">{note.title}</p>
+                  <p className="text-xs lg:text-sm text-gray-400 line-clamp-2 mt-1">{note.content}</p>
                 </div>
               ))}
             </div>
