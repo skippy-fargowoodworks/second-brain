@@ -20,12 +20,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the application with secrets mounted
+# Build the application with secrets mounted (use sh, not bash - Alpine)
 RUN --mount=type=secret,id=DATABASE_URL \
     --mount=type=secret,id=TURSO_AUTH_TOKEN \
-    bash -c 'export DATABASE_URL=$(cat /run/secrets/DATABASE_URL) && \
+    export DATABASE_URL=$(cat /run/secrets/DATABASE_URL) && \
     export TURSO_AUTH_TOKEN=$(cat /run/secrets/TURSO_AUTH_TOKEN) && \
-    npm run build'
+    npm run build
 
 # Production image
 FROM base AS runner
