@@ -41,8 +41,16 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Copy node_modules and prisma schema for migrations (needed by nextjs)
+COPY --from=deps /app/node_modules ./node_modules
+COPY --chown=nextjs:nodejs prisma ./prisma
+
 # Set up data directory ownership
 RUN chown -R nextjs:nodejs /app/data
+
+# Create entrypoint script to push schema then start server
+RUN echo '#!/bin/sh\necho "Applying database schema..."\nnpx prisma db push --skip-generate\necho "Starting server..."\nnode server.js' > /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
 
 USER nextjs
 
@@ -51,4 +59,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["/app/entrypoint.sh"]
