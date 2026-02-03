@@ -11,44 +11,52 @@ model Task {
   id          String   @id @default(cuid())
   title       String
   description String?
-  status      String   @default("todo") // todo, in-progress, done, blocked
-  priority    String   @default("medium") // low, medium, high, critical
+  status      String   @default("todo")
+  priority    String   @default("medium")
   dueDate     DateTime?
   category    String?
-  tags        String?  // comma-separated
+  tags        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("tasks")
 }
 
 model Note {
   id          String   @id @default(cuid())
   title       String
   content     String
-  category    String   @default("general") // projects, ideas, reference, general
-  tags        String?  // comma-separated
+  category    String   @default("general")
+  tags        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("notes")
 }
 
 model Conversation {
   id           String   @id @default(cuid())
   title        String
-  participants String   // comma-separated
+  participants String
   summary      String
-  decisions    String?  // what was decided
-  linkedTasks  String?  // task IDs, comma-separated
+  decisions    String?
+  linkedTasks  String?
   date         DateTime @default(now())
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@map("conversations")
 }
 
 model Credential {
   id          String   @id @default(cuid())
   service     String
   username    String
-  password    String   // Will be masked in UI
+  password    String
   url         String?
   notes       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("credentials")
 }
