@@ -2,6 +2,8 @@ import { prisma } from "@/lib/db";
 import { Card, StatCard } from "@/components/Card";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 async function getStats() {
   const [tasks, notes] = await Promise.all([
     prisma.task.findMany({ orderBy: { createdAt: "desc" } }),
