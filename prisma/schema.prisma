@@ -8,55 +8,24 @@ datasource db {
 }
 
 model Task {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  status      String   @default("todo")
-  priority    String   @default("medium")
-  dueDate     DateTime?
-  category    String?
-  tags        String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("tasks")
+  id            String      @id @default(cuid())
+  title         String
+  description   String?
+  status        String      @default("backlog")
+  priority      String?
+  dueDate       DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  projectId     String?
+  tags          String?
+  notes         String?
 }
 
 model Note {
-  id          String   @id @default(cuid())
-  title       String
-  content     String
-  category    String   @default("general")
-  tags        String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("notes")
-}
-
-model Conversation {
-  id           String   @id @default(cuid())
-  title        String
-  participants String
-  summary      String
-  decisions    String?
-  linkedTasks  String?
-  date         DateTime @default(now())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  @@map("conversations")
-}
-
-model Credential {
-  id          String   @id @default(cuid())
-  service     String
-  username    String
-  password    String
-  url         String?
-  notes       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("credentials")
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  tags      String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
