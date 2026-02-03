@@ -20,13 +20,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build args for database connection during build
-ARG DATABASE_URL
-ARG TURSO_AUTH_TOKEN
-ENV DATABASE_URL=${DATABASE_URL}
-ENV TURSO_AUTH_TOKEN=${TURSO_AUTH_TOKEN}
-
-# Build the application
+# Build the application (no build secrets needed for SQLite)
 RUN npm run build
 
 # Production image
@@ -34,6 +28,9 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+
+# Create data directory for SQLite
+RUN mkdir -p /app/data
 
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
@@ -43,6 +40,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Set up data directory ownership
+RUN chown -R nextjs:nodejs /app/data
 
 USER nextjs
 

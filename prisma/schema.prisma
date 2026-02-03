@@ -1,10 +1,10 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
   provider = "sqlite"
+  url      = "file:/app/data/second-brain.db"
 }
 
 model Task {
