@@ -1,17 +1,18 @@
 import { prisma } from "@/lib/db";
 import { Card, StatCard } from "@/components/Card";
 import Link from "next/link";
+import type { Note, Task } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
 async function getStats() {
-  const [tasks, notes] = await Promise.all([
+  const [tasks, notes]: [Task[], Note[]] = await Promise.all([
     prisma.task.findMany({ orderBy: { createdAt: "desc" } }),
     prisma.note.findMany({ orderBy: { createdAt: "desc" } }),
   ]);
 
-  const inProgressTasks = tasks.filter((t) => t.status === "in-progress").length;
-  const criticalTasks = tasks.filter((t) => t.priority === "critical").length;
+  const inProgressTasks = tasks.filter((t: Task) => t.status === "in-progress").length;
+  const criticalTasks = tasks.filter((t: Task) => t.priority === "critical").length;
 
   return {
     totalTasks: tasks.length,
@@ -59,7 +60,7 @@ export default async function Dashboard() {
           <Link href="/tasks" className="text-sm text-blue-300 hover:text-blue-200 transition-colors">View all</Link>
         </div>
         <div className="space-y-6">
-          {stats.recentTasks.map((task) => (
+          {stats.recentTasks.map((task: Task) => (
             <div
               key={task.id}
               className="flex items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10"
@@ -89,7 +90,7 @@ export default async function Dashboard() {
           <Link href="/notes" className="text-sm text-blue-300 hover:text-blue-200 transition-colors">View all</Link>
         </div>
         <div className="space-y-6">
-          {stats.recentNotes.map((note) => (
+          {stats.recentNotes.map((note: Note) => (
             <div
               key={note.id}
               className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10"

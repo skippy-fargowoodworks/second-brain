@@ -2,6 +2,10 @@ import { prisma } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import type { Note, Task } from "@prisma/client";
+
+type ContextTask = Pick<Task, "id" | "title" | "status" | "priority" | "category" | "updatedAt">;
+type ContextNote = Pick<Note, "id" | "title" | "content" | "category" | "updatedAt">;
 
 // Returns a summary of recent context for Skippy's memory sync
 export async function GET(request: NextRequest) {
@@ -9,7 +13,7 @@ export async function GET(request: NextRequest) {
   const limit = parseInt(searchParams.get("limit") || "10");
   
   // Get recent tasks
-  const tasks = await prisma.task.findMany({
+  const tasks: ContextTask[] = await prisma.task.findMany({
     orderBy: { updatedAt: "desc" },
     take: limit,
     select: {
@@ -23,7 +27,7 @@ export async function GET(request: NextRequest) {
   });
   
   // Get recent notes
-  const notes = await prisma.note.findMany({
+  const notes: ContextNote[] = await prisma.note.findMany({
     orderBy: { updatedAt: "desc" },
     take: limit,
     select: {
@@ -46,12 +50,12 @@ export async function GET(request: NextRequest) {
   }
   
   // Get active/in-progress tasks
-  const activeTasks = tasks.filter(t => 
+  const activeTasks = tasks.filter((t: ContextTask) => 
     t.status === "in-progress" || t.status === "in_progress"
   );
   
   // Get critical tasks
-  const criticalTasks = tasks.filter(t => t.priority === "critical");
+  const criticalTasks = tasks.filter((t: ContextTask) => t.priority === "critical");
   
   return NextResponse.json({
     status,
@@ -64,7 +68,7 @@ export async function GET(request: NextRequest) {
     activeTasks,
     criticalTasks,
     recentTasks: tasks.slice(0, 5),
-    recentNotes: notes.slice(0, 3).map(n => ({
+    recentNotes: notes.slice(0, 3).map((n: ContextNote) => ({
       ...n,
       content: n.content?.substring(0, 200) + (n.content && n.content.length > 200 ? "..." : ""),
     })),

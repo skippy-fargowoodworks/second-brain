@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import type { Note } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 // Quick capture endpoint for logging thoughts, decisions, and events
@@ -50,7 +51,7 @@ export async function GET(request: NextRequest) {
     take: limit,
   });
   
-  return NextResponse.json(captures.map(c => ({
+  return NextResponse.json(captures.map((c: Note) => ({
     id: c.id,
     title: c.title,
     content: c.content,
