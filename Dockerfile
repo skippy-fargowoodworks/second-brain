@@ -59,4 +59,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-ENTRYPOINT ["/bin/bash", "-c", "/app/docker-entrypoint.sh"]
+CMD ["/bin/bash", "/app/docker-entrypoint.sh"]
